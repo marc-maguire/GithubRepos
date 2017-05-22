@@ -10,8 +10,8 @@
 
 @interface Repo : NSObject
 
-@property (nonatomic) NSDictionary *jsonData;
+@property (nonatomic) NSString *name;
 
-- (instancetype)initWithJSON:(NSDictionary *)JSONDictionary;
+- (instancetype)initWithName:(NSString *)name;
 
 @end

@@ -45,7 +45,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    cell.textLabel.text = self.repoNameArray[indexPath.row].jsonData[@"name"];
+    cell.textLabel.text = self.repoNameArray[indexPath.row].name;
     
     return cell;
     
@@ -91,12 +91,12 @@
         for (NSDictionary *repo in repos) {
             //If we get to this point, we have the JSON data back from our request, so let's use it. When we made this request in our browser, we saw something similar to this:
             
-            Repo *JSONrepo = [[Repo alloc]initWithJSON:repo];
+            Repo *JSONrepo = [[Repo alloc]initWithName:repo[@"name"]];
     
 
 //            NSString *repoName = repo[@"name"];
             [self.repoNameArray addObject:JSONrepo];
-            NSLog(@"repo: %@",JSONrepo.jsonData[@"name"]);
+            NSLog(@"repo: %@",JSONrepo.name);
         }
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {

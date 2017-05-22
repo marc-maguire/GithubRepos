@@ -10,11 +10,11 @@
 
 @implementation Repo
 
-- (instancetype)initWithJSON:(NSDictionary *)JSONDictionary{
+- (instancetype)initWithName:(NSString *)name{
     
     if (self = [super init]){
         
-        _jsonData = JSONDictionary;
+        _name = name;
     }
     
     return self;
