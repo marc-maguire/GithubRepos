@@ -7,10 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "Repo.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic) NSMutableArray *repoNameArray;
+@property (nonatomic) NSMutableArray <Repo *> *repoNameArray;
 
 @end
 
@@ -43,7 +44,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.textLabel.text = self.repoNameArray[indexPath.row];
+    
+    cell.textLabel.text = self.repoNameArray[indexPath.row].jsonData[@"name"];
     
     return cell;
     
@@ -89,9 +91,12 @@
         for (NSDictionary *repo in repos) {
             //If we get to this point, we have the JSON data back from our request, so let's use it. When we made this request in our browser, we saw something similar to this:
             
-            NSString *repoName = repo[@"name"];
-            [self.repoNameArray addObject:repoName];
-            NSLog(@"repo: %@",repoName);
+            Repo *JSONrepo = [[Repo alloc]initWithJSON:repo];
+    
+
+//            NSString *repoName = repo[@"name"];
+            [self.repoNameArray addObject:JSONrepo];
+            NSLog(@"repo: %@",JSONrepo.jsonData[@"name"]);
         }
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
